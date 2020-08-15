@@ -1,0 +1,16 @@
+.AddCard {
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  margin-left: 30px;
+  fill: #fff;
+  fill-opacity: 0.25;
+  cursor: pointer;
+}
+
+.AddCard:hover {
+  margin-left: 30px;
+  fill: red;
+  fill-opacity: 0.65;
+}
