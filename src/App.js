@@ -1,11 +1,10 @@
 import React from "react";
 import Field from "./components/Field/Field";
 
-
-function App() {
+function App(props) {
   return (
     <React.Fragment>
-      <Field/>
+      <Field />
     </React.Fragment>
   );
 }
