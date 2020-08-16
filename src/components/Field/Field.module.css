@@ -1,9 +1,12 @@
 .Field {
+  min-width: 95vw;
   width: 95%;
-  height: 95%;
+  min-height: 95vh;
   border: 1px solid #fff;
   border-radius: 20px;
   padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .SubField {

@@ -3,19 +3,30 @@ import styles from "./Field.module.css";
 import Card from "../Card/Card";
 import AddCardButton from "../AddCard/AddCard";
 
-import { addCardCreater } from "../../store/actionCreators/actionCreator";
+import {
+  addCardCreater,
+  submitEditCardCreater,
+  editCardCreater,
+} from "../../store/actionCreators/actionCreator";
 
 import { connect } from "react-redux";
-import reducer from "../../store/reducer/reducer";
 
 const Field = (props) => {
-  console.log("props-cards", props);
+  console.log("props-cards", props.cards);
 
   return (
     <div className={styles.Field}>
       <div className={styles.SubField}>
-        {props.cards.map((x) => (
-          <Card id={x.id} title={x.title} subtitle={x.subtitle} text={x.text} />
+        {props.cards.map((value) => (
+          <Card
+            id={value.id}
+            title={value.title}
+            subtitle={value.subtitle}
+            text={value.text}
+            submitEdit={props.SubmitEditingCard.bind(this)}
+            edit={props.editCardCreater.bind(this, value.id)}
+            isEdit={value.isEdit}
+          />
         ))}
         <AddCardButton onclick={props.AddCard.bind(this)} />
       </div>
@@ -28,9 +39,12 @@ const mapStateToProps = function (state) {
     cards: state.cards,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     AddCard: () => dispatch(addCardCreater()),
+    SubmitEditingCard: () => dispatch(submitEditCardCreater()),
+    editCardCreater: (id) => dispatch(editCardCreater(id)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Field);
