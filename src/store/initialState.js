@@ -7,6 +7,7 @@ const initialState = {
       text: `Some quick example text to build on the card title and make up the
     bulk of the card's content.`,
       isEdit: false,
+      newEditedValues:[],
     },
     {
       id: 1,
@@ -15,8 +16,9 @@ const initialState = {
       text: `Some quick example text to build on the card title and make up the
     bulk of the card's content.`,
       isEdit: false,
+      newEditedValues:[],
     },
-    { id: 2, isEdit: false },
+    { id: 2,  title:'', subtitle:'', text:'', isEdit: true, newEditedValues:[] },
   ],
   // title: "Card Title",
   // text: `Some quick example text to build on the card title and make up the

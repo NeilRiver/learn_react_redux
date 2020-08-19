@@ -1,4 +1,9 @@
-import { ADD_CARD, SUBMIT_EDIT_CARD, EDIT_CARD } from "../actions/action";
+import {
+  ADD_CARD,
+  SUBMIT_EDIT_CARD,
+  EDIT_CARD,
+  EDIT_TEXT_CARD,
+} from "../actions/action";
 
 export const addCardCreater = (value) => {
   return {
@@ -16,6 +21,16 @@ export const editCardCreater = (value) => {
   return {
     type: EDIT_CARD,
     payload: true,
-    id:value
+    id: value,
+  };
+};
+
+export const editTextCardCreater = (id, text_title, text_subtitle, text) => {
+  return {
+    type: EDIT_TEXT_CARD,
+    title: text_title,
+    subtitle: text_subtitle,
+    text: text,
+    id: id,
   };
 };

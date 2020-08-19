@@ -7,12 +7,13 @@ import {
   addCardCreater,
   submitEditCardCreater,
   editCardCreater,
+  editTextCardCreater,
 } from "../../store/actionCreators/actionCreator";
 
 import { connect } from "react-redux";
 
 const Field = (props) => {
-  console.log("props-cards", props.cards);
+ // console.log("props-cards", props.cards[1].newEditedValues);
 
   return (
     <div className={styles.Field}>
@@ -25,7 +26,9 @@ const Field = (props) => {
             text={value.text}
             submitEdit={props.SubmitEditingCard.bind(this)}
             edit={props.editCardCreater.bind(this, value.id)}
+            editText={props.editTextCardCreater.bind(this)}
             isEdit={value.isEdit}
+            newEditedValues={value.newEditedValues}
           />
         ))}
         <AddCardButton onclick={props.AddCard.bind(this)} />
@@ -45,6 +48,7 @@ const mapDispatchToProps = (dispatch) => {
     AddCard: () => dispatch(addCardCreater()),
     SubmitEditingCard: () => dispatch(submitEditCardCreater()),
     editCardCreater: (id) => dispatch(editCardCreater(id)),
+    editTextCardCreater: (id, text_title, text_subtitle, text)=> dispatch(editTextCardCreater(id, text_title, text_subtitle, text))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Field);

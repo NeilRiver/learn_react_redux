@@ -1,5 +1,5 @@
 import initialState from "../initialState";
-import { ADD_CARD, SUBMIT_EDIT_CARD, EDIT_CARD } from "../actions/action";
+import { ADD_CARD, SUBMIT_EDIT_CARD, EDIT_CARD, EDIT_TEXT_CARD } from "../actions/action";
 
 const nextId = (state = initialState) => {
   let maxId = 0;
@@ -11,11 +11,35 @@ const nextId = (state = initialState) => {
   return state.cards.length === 0 ? 0 : maxId + 1;
 };
 
+const pointerChangeCard =(state = initialState, id, title, subtitle, text)=>{
+
+const newObj = JSON.parse(JSON.stringify(state))
+
+console.log('-----------------')
+console.log(newObj,id,title)
+console.log('-----------------')
+
+  for(let key in newObj.cards){
+   
+    if(newObj.cards[key].id === id){
+      //newObj.cards[key].title = title
+      newObj.cards[key].newEditedValues[0] = title
+      newObj.cards[key].newEditedValues[1] = subtitle
+      newObj.cards[key].newEditedValues[2] = text
+   }
+  
+  }
+ 
+
+  return newObj
+}
+
+
 const todoApp = (state = initialState, action) => {
-  console.log(action);
+  console.log(action)
   switch (action.type) {
     case ADD_CARD:
-      return { cards: [...state.cards, { id: nextId(state), isEdit: true }] };
+      return { cards: [...state.cards, { id: nextId(state), title:'', subtitle:'', text:'', isEdit: true, newEditedValues:[]  }] };
     case EDIT_CARD:
       //return editByID(state,action.id);
       return {
@@ -23,6 +47,7 @@ const todoApp = (state = initialState, action) => {
         cards: [
           ...state.cards.map((element) => ({
             ...element,
+            newEditedValues:  (element.id === action.id)?[element.title, element.subtitle, element.text]: element.newEditedValues,
             //isEdit: element.id === action.id,
             isEdit:
               element.isEdit === true
@@ -33,6 +58,9 @@ const todoApp = (state = initialState, action) => {
           })),
         ],
       };
+    case EDIT_TEXT_CARD:
+      return pointerChangeCard(state, action.id, action.title, action.subtitle, action.text);
+
     case SUBMIT_EDIT_CARD:
       return state;
     default:
