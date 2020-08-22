@@ -4,6 +4,7 @@ import {
   SUBMIT_EDIT_CARD,
   EDIT_CARD,
   EDIT_TEXT_CARD,
+  DROP,
 } from "../actions/action";
 
 const nextId = (state = initialState) => {
@@ -64,12 +65,7 @@ const todoApp = (state = initialState, action) => {
                 ? [element.title, element.subtitle, element.text]
                 : element.newEditedValues,
             //isEdit: element.id === action.id,
-            isEdit:
-              element.isEdit === true
-                ? true
-                : element.id === action.id
-                ? true
-                : false,
+            isEdit: element.id === action.id ? !element.isEdit : element.isEdit,
           })),
         ],
       };
@@ -81,6 +77,8 @@ const todoApp = (state = initialState, action) => {
         action.subtitle,
         action.text
       );
+    case DROP:
+      return state;
     case SUBMIT_EDIT_CARD:
       //return state;
       return {
@@ -100,15 +98,12 @@ const todoApp = (state = initialState, action) => {
               element.id === action.id
                 ? state.cards[action.id].newEditedValues[2]
                 : state.cards[element.id].text,
-            isEdit:
-              element.id === action.id
-              ?  false
-              :  element.isEdit
-              // element.isEdit === false
-              //   ? false
-              //   : element.id === action.id
-              //   ? false
-              //   : true,
+            isEdit: element.id === action.id ? false : element.isEdit,
+            // element.isEdit === false
+            //   ? false
+            //   : element.id === action.id
+            //   ? false
+            //   : true,
           })),
         ],
       };
