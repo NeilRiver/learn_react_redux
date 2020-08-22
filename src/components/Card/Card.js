@@ -11,7 +11,7 @@ export default function CardBootstrap(props) {
         <Card.Title>
           {props.isEdit === true ? (
             <Form.Control
-              type="email"
+              type="text"
               onChange={(e) =>
                 props.editText(
                   props.id,
@@ -35,7 +35,7 @@ export default function CardBootstrap(props) {
         <Card.Subtitle className="mb-2 text-muted">
           {props.isEdit === true ? (
             <Form.Control
-              type="email"
+              type="text"
               onChange={(e) =>
                 props.editText(
                   props.id,
@@ -56,7 +56,7 @@ export default function CardBootstrap(props) {
         <Card.Text>
           {props.isEdit === true ? (
             <Form.Control
-              type="email"
+              type="text "
               onChange={(e) =>
                 props.editText(
                   props.id,

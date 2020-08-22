@@ -14,13 +14,14 @@ export const addCardCreater = (value) => {
 export const submitEditCardCreater = (value) => {
   return {
     type: SUBMIT_EDIT_CARD,
+    id: value,
   };
 };
 
 export const editCardCreater = (value) => {
   return {
     type: EDIT_CARD,
-    payload: true,
+    // payload: true,
     id: value,
   };
 };

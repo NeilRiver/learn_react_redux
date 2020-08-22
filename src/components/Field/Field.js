@@ -24,7 +24,7 @@ const Field = (props) => {
             title={value.title}
             subtitle={value.subtitle}
             text={value.text}
-            submitEdit={props.SubmitEditingCard.bind(this)}
+            submitEdit={props.SubmitEditingCard.bind(this, value.id)}
             edit={props.editCardCreater.bind(this, value.id)}
             editText={props.editTextCardCreater.bind(this)}
             isEdit={value.isEdit}
@@ -46,7 +46,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = (dispatch) => {
   return {
     AddCard: () => dispatch(addCardCreater()),
-    SubmitEditingCard: () => dispatch(submitEditCardCreater()),
+    SubmitEditingCard: (id) => dispatch(submitEditCardCreater(id)),
     editCardCreater: (id) => dispatch(editCardCreater(id)),
     editTextCardCreater: (id, text_title, text_subtitle, text)=> dispatch(editTextCardCreater(id, text_title, text_subtitle, text))
   };
