@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 export default function CardBootstrap(props) {
   return (
     <Card style={{ width: "18rem", margin: "6px" }}>
-      <Card.Body>
+      <Card.Body style={{ display: "flex", flexDirection: "column" }}>
         <Card.Title>
           {props.isEdit === true ? (
             <Form.Control
@@ -53,7 +53,7 @@ export default function CardBootstrap(props) {
             "Empty SubTitle"
           )}
         </Card.Subtitle>
-        <Card.Text>
+        <Card.Text style={{ flex: "auto" }}>
           {props.isEdit === true ? (
             <Form.Control
               type="text "
