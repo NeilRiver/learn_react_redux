@@ -36,6 +36,25 @@ const pointerChangeCard = (state = initialState, id, title, subtitle, text) => {
   return newObj;
 };
 
+const changeTextAfterDropCard = (state, i_id) => {
+  const newObj = JSON.parse(JSON.stringify(state));
+  console.log("id = " + i_id, newObj.cards);
+
+  let currentId;
+
+  for (let key in newObj.cards) {
+    if (newObj.cards[key].id === i_id) {
+      newObj.cards[key].title = newObj.cards[key].newEditedValues[0];
+      newObj.cards[key].subtitle = newObj.cards[key].newEditedValues[1];
+      newObj.cards[key].text = newObj.cards[key].newEditedValues[2];
+      newObj.cards[key].isEdit = false;
+    }
+  }
+
+  console.log(currentId);
+  return newObj;
+};
+
 const todoApp = (state = initialState, action) => {
   console.log(action);
   switch (action.type) {
@@ -78,35 +97,16 @@ const todoApp = (state = initialState, action) => {
         action.text
       );
     case DROP:
-      return state;
-    case SUBMIT_EDIT_CARD:
-      //return state;
       return {
         ...state,
         cards: [
-          ...state.cards.map((element) => ({
-            ...element,
-            title:
-              element.id === action.id
-                ? state.cards[action.id].newEditedValues[0]
-                : state.cards[element.id].title,
-            subtitle:
-              element.id === action.id
-                ? state.cards[action.id].newEditedValues[1]
-                : state.cards[element.id].subtitle,
-            text:
-              element.id === action.id
-                ? state.cards[action.id].newEditedValues[2]
-                : state.cards[element.id].text,
-            isEdit: element.id === action.id ? false : element.isEdit,
-            // element.isEdit === false
-            //   ? false
-            //   : element.id === action.id
-            //   ? false
-            //   : true,
-          })),
+          ...state.cards.filter((element) =>
+            element.id !== action.id ? element : null
+          ),
         ],
       };
+    case SUBMIT_EDIT_CARD:
+      return changeTextAfterDropCard(state, action.id);
     default:
       return state;
   }
